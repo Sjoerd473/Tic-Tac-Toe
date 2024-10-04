@@ -1,0 +1,145 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+* {
+  margin: 0;
+  list-style: none;
+}
+
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  
+  height: 100vh;
+  --fonts: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: var(--fonts)
+}
+
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+button{
+  border:none;
+  background-color: white;
+  --tile-border: 5px solid black;
+}
+.board{
+  margin:auto;
+    width: 75vw;
+    height:75vh;
+    display: grid;
+    grid: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    gap:1px;
+    justify-content: center;
+    align-content: end;
+    background-color: black;
+}
+
+.board button {
+    width:100%;
+    height:100%;
+    font-size:10rem;
+    
+}
+
+.board button:hover:enabled{
+  box-shadow: inset 25px 25px 25px 0px gold;
+  
+}
+.input-items{
+    display: flex;
+    gap:10rem;
+    justify-content: center;
+    margin:1rem;
+}
+
+.input-items > div{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-items button {
+  border: 1px solid black;
+padding:0 2rem 0 2rem;
+border-radius: 10px;
+}
+
+.input-items button:hover{
+  box-shadow: 5px 5px 25px 5px green;
+}
+
+.input-items input{
+  border-radius: 10px;
+  border:none;
+  background-color: rgb(186, 212, 212);
+  margin-top: 5px;
+}
+
+/* button[data-tile='1']{
+border-right: var(--tile-border);
+border-bottom: var(--tile-border);
+}
+button[data-tile='2']{
+border-bottom: var(--tile-border);
+}
+button[data-tile='3']{
+border-left: var(--tile-border);
+border-bottom: var(--tile-border);
+}
+button[data-tile='4']{
+  border-top: var(--tile-border);
+
+}
+button[data-tile='5']{
+
+}
+button[data-tile='6']{
+  border-right: var(--tile-border);
+
+}
+button[data-tile='7']{
+
+}
+button[data-tile='8']{
+
+}
+button[data-tile='9']{
+
+} */

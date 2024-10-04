@@ -8,27 +8,34 @@
 </head>
 <body>
 <div class="board">
-    <div><button data-tile="1"></button></div>
-    <div><button data-tile="2"></button></div>
-    <div><button data-tile="3"></button></div>
-    <div><button data-tile="4"></button></div>
-    <div><button data-tile="5"></button></div>
-    <div><button data-tile="6"></button></div>
-    <div><button data-tile="7"></button></div>
-    <div><button data-tile="8"></button></div>
-    <div><button data-tile="9"></button></div>
+    <div><button data-tile="1">X</button></div>
+    <div><button data-tile="2">O</button></div>
+    <div><button data-tile="3">X</button></div>
+    <div><button data-tile="4">X</button></div>
+    <div><button data-tile="5">O</button></div>
+    <div><button data-tile="6">O</button></div>
+    <div><button data-tile="7">O</button></div>
+    <div><button data-tile="8">X</button></div>
+    <div><button data-tile="9">X</button></div>
 </div>
-<div class="info-panel"></div>
-<div>
+
+<div class="input-items">
     <button>Start</button>
     <div>
         <label for=""></label>
         <input type="text">
         <label for=""></label>
-        <input type="text"></div>
+        <input type="text">
+    </div>
 </div>
 
-
+<dialog class="modal">
+    <h1></h1>
+    <div>
+        <button>New Game</button>
+        <button>Close</button>
+    </div>
+</dialog>
     <script src="script.js"></script>
 </body>
 </html>
