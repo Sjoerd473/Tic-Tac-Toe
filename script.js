@@ -13,14 +13,51 @@ function Gameboard(){
             }
         }
     }
+
+    const getBoard = () => board;
+
+    const printBoard = () => {
+        console.log(board)
+    }
+
+    const checkBoard = () => {
+        console.log('walk the board')
+    }
+
+    return {getBoard, printBoard, checkBoard}
 }
 
 function Cell(){
-    const test = () =>
-        alert('boop')
-    return {test}
+    let value = 0;
+
+    const getValue = () =>  value;
+
+    const setToken = () => {
+        console.log('boop')
+    }
+    return {getValue, setToken}
 }
 
-function Gamestate(){
+function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo'){
 
+    const players = [{
+        name : playerOneName,
+        token: 'X'
+    },{
+        name: playerTwoName,
+        token: 'O'
+    }];
+
+    const activePlayer = players[0]
+
+    const board = Gameboard()
+
+    const switchActivePlayer = () => {};
+
+    const printNewRound = () => {};
+
+    const getActivePlayer = () => {};
+
+    const playRound = (row,column) => {};
+    return {playRound}
 }
