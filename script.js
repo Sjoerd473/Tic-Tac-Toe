@@ -78,7 +78,7 @@ function Gameboard() {
                 logBoard[i].push(board[i][j].getToken())
             }
 
-        } console.table(logBoard)
+        } return logBoard
     }
 
     const placeToken = (row, column, activePlayer) => {
@@ -123,7 +123,7 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
     };
 
     const printNewRound = () => {
-        board.printBoard()
+        console.table(board.printBoard())
         console.log(`It is currently ${getActivePlayer().name}'s turn to place a token`)
 
     };
@@ -136,26 +136,38 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
 
     const playRound = (row, column) => {
         board.placeToken(row, column, activePlayer)
-        if (checkWin() === 'win') {
-            console.log(`${getActivePlayer().name} wins the round!`)
-            endGame();
-        } else if (checkWin() === 'tie') {
-            console.log('The game ends in a tie.')
-            endGame()
-        } else {
+        
+            checkWin();
             switchActivePlayer();
+            
             printNewRound();
-        }
+            
+        
+        
+    };
+    // if (checkWin() === 'win') {
+    //     console.log(`${getActivePlayer().name} wins the round!`)
+    //     endGame();
+    // } else if (checkWin() === 'tie') {
+    //     console.log('The game ends in a tie.')
+    //     endGame()
+    // } else {
+    //     switchActivePlayer();
+    //     printNewRound();
+    // }  
+    const testCase = () =>
+    {
+        console.log('boop')
     }
-        ;
-
     const checkWin = () => {
-        const winBoard = board.getBoard();
+        const winBoard = board.printBoard();
+        console.table(board.getBoard());
         if (winBoard.flat().includes(0) === false) {
             return 'tie'
         }
         else if (winBoard[0][0] === 'X' && winBoard[0][1] === 'X' && winBoard[0][2] === 'X') {
             // horizontal top
+            console.log(`${getActivePlayer().name} wins the round!`)
             return 'win';
         } else if (winBoard[1][0] === 'X' && winBoard[1][1] === 'X' && winBoard[1][2] === 'X') {
             // horizontal middle
@@ -202,7 +214,7 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
         } else if (winBoard[0][2] === 'O' && winBoard[1][1] === 'O' && winBoard[2][0] === 'O') {
             // diagonal bottom left to top right
             return 'win';
-        }
+        } else {return ''};
 
 
         //call getToken on tiles to check for winning layouts
@@ -229,46 +241,55 @@ function displayController(){
             changeText(e.target)
             state.playRound(0, 0)
             deactivateTile(e.target);
+            
                 
         })
         tiles[1].addEventListener('click', (e) => {
             changeText(e.target) 
             state.playRound(0, 1)
+            deactivateTile(e.target);
                
         })
         tiles[2].addEventListener('click', (e) => {
             changeText(e.target)
             state.playRound(0, 2)
+            deactivateTile(e.target);
                 
         })
         tiles[3].addEventListener('click', (e) => {
             changeText(e.target)
             state.playRound(1, 0)
+            deactivateTile(e.target);
                 
         })
         tiles[4].addEventListener('click', (e) => {
             changeText(e.target)
             state.playRound(1, 1)
+            deactivateTile(e.target);
                 
         })
         tiles[5].addEventListener('click', (e) => {
             changeText(e.target)
             state.playRound(1, 2)
+            deactivateTile(e.target);
                 
         })
         tiles[6].addEventListener('click', (e) => {
             changeText(e.target)
             state.playRound(2, 0)
+            deactivateTile(e.target);
                 
         })
         tiles[7].addEventListener('click', (e) => {
             changeText(e.target)
             state.playRound(2, 1)
+            deactivateTile(e.target);
                 
         })
         tiles[8].addEventListener('click', (e) => {
             changeText(e.target) 
             state.playRound(2, 2)
+            deactivateTile(e.target);
                
         })
     
