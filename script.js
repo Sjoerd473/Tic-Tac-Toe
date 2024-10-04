@@ -212,5 +212,80 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
 
 
     printNewRound()
-    return { playRound }
+    return { playRound, getActivePlayer }
 }
+
+function displayController(){
+
+    const board=Gameboard();
+
+    const state=Gamestate();
+
+    let activePlayer = state.getActivePlayer();
+
+    const activateTiles = () => {
+        let tiles = document.querySelectorAll('[data-tile]');
+        tiles[0].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(0, 0)
+            deactivateTile(e.target);
+                
+        })
+        tiles[1].addEventListener('click', (e) => {
+            changeText(e.target) 
+            state.playRound(0, 1)
+               
+        })
+        tiles[2].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(0, 2)
+                
+        })
+        tiles[3].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(1, 0)
+                
+        })
+        tiles[4].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(1, 1)
+                
+        })
+        tiles[5].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(1, 2)
+                
+        })
+        tiles[6].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(2, 0)
+                
+        })
+        tiles[7].addEventListener('click', (e) => {
+            changeText(e.target)
+            state.playRound(2, 1)
+                
+        })
+        tiles[8].addEventListener('click', (e) => {
+            changeText(e.target) 
+            state.playRound(2, 2)
+               
+        })
+    
+   
+}
+
+    const changeText = (button) => {
+        activePlayer = state.getActivePlayer();
+        button.textContent = `${activePlayer.token}`
+        
+    }
+
+    const deactivateTile = (button) =>{
+        button.setAttribute('disabled','');
+    }
+return {activateTiles}
+}
+
+// const test1= Gamestate();
+const test2= displayController();
