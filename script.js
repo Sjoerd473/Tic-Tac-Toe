@@ -134,19 +134,23 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
 
     };
 
-    const endGame = () => {
+    const endGame = (outcome) => {
         const dialog = document.querySelector('.modal')
         const winText = document.querySelector('.modal > h1')
         const newGameBtn = document.querySelector('.win')
         const closeBtn = document.querySelector('.close')
-
-        winText.textContent = `${getActivePlayer().name} wins the round!`
+        
+        
         newGameBtn.addEventListener('click',() => window.location.reload());
         
         closeBtn.addEventListener('click', () => dialog.close());
 
         dialog.showModal()
-        
+        if (outcome === 'win'){
+        winText.textContent = `${getActivePlayer().name} wins the round!`
+        } else if (outcome === 'tie'){
+            winText.textContent = `The game ends in a draw!`
+        }
     }
 
     
@@ -164,72 +168,79 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
         
         
     };
-    // if (checkWin() === 'win') {
-    //     console.log(`${getActivePlayer().name} wins the round!`)
-    //     endGame();
-    // } else if (checkWin() === 'tie') {
-    //     console.log('The game ends in a tie.')
-    //     endGame()
-    // } else {
-    //     switchActivePlayer();
-    //     printNewRound();
-    // }  
+
    
     const checkWin = () => {
         const winBoard = board.printBoard();
         console.table(board.getBoard());
         if (winBoard.flat().includes(0) === false) {
+            endGame('tie');
             return 'tie'
         }
         else if (winBoard[0][0] === 'X' && winBoard[0][1] === 'X' && winBoard[0][2] === 'X') {
             // horizontal top
             console.log(`${getActivePlayer().name} wins the round!`)
-            endGame();
+            endGame('win');
             return 'win';
         } else if (winBoard[1][0] === 'X' && winBoard[1][1] === 'X' && winBoard[1][2] === 'X') {
             // horizontal middle
+            endGame('win')
             return 'win';
         } else if (winBoard[2][0] === 'X' && winBoard[2][1] === 'X' && winBoard[2][2] === 'X') {
             //horizontal bottom
+            endGame('win')
             return 'win';
         } else if (winBoard[0][0] === 'X' && winBoard[1][0] === 'X' && winBoard[2][0] === 'X') {
             // vertical start
+            endGame('win')
             return 'win';
         } else if (winBoard[0][1] === 'X' && winBoard[1][1] === 'X' && winBoard[2][1] === 'X') {
             //vertical middle
+            endGame('win')
             return 'win';
         } else if (winBoard[0][2] === 'X' && winBoard[1][2] === 'X' && winBoard[2][2] === 'X') {
             // vertical end
+            endGame('win')
             return 'win';
         } else if (winBoard[0][0] === 'X' && winBoard[1][1] === 'X' && winBoard[2][2] === 'X') {
             //diagonal top left to bottom right
+            endGame('win')
             return 'win';
         } else if (winBoard[0][2] === 'X' && winBoard[1][1] === 'X' && winBoard[2][0] === 'X') {
             // diagonal bottom left to top right
+            endGame('win')
             return 'win';
         } else if (winBoard[0][0] === 'O' && winBoard[0][1] === 'O' && winBoard[0][2] === 'O') {
             // horizontal top
+            endGame('win')
             return 'win';
         } else if (winBoard[1][0] === 'O' && winBoard[1][1] === 'O' && winBoard[1][2] === 'O') {
             // horizontal middle
+            endGame('win')
             return 'win';
         } else if (winBoard[2][0] === 'O' && winBoard[2][1] === 'O' && winBoard[2][2] === 'O') {
             //horizontal bottom
+            endGame('win')
             return 'win';
         } else if (winBoard[0][0] === 'O' && winBoard[1][0] === 'O' && winBoard[2][0] === 'O') {
             // vertical start
+            endGame('win')
             return 'win';
         } else if (winBoard[0][1] === 'O' && winBoard[1][1] === 'O' && winBoard[2][1] === 'O') {
             //vertical middle
+            endGame('win')
             return 'win';
         } else if (winBoard[0][2] === 'O' && winBoard[1][2] === 'O' && winBoard[2][2] === 'O') {
             // vertical end
+            endGame('win')
             return 'win';
         } else if (winBoard[0][0] === 'O' && winBoard[1][1] === 'O' && winBoard[2][2] === 'O') {
             //diagonal top left to bottom right
+            endGame('win')
             return 'win';
         } else if (winBoard[0][2] === 'O' && winBoard[1][1] === 'O' && winBoard[2][0] === 'O') {
             // diagonal bottom left to top right
+            endGame('win')
             return 'win';
         } else {return ''};
 
@@ -318,12 +329,18 @@ function displayController(){
         let btn =  document.querySelector('.input-items button');
         btn.addEventListener('click', () => {
         activateTiles(),
+        clearItems(),
         state.setName(nameOne, nameTwo)})
     }
     const changeText = (button) => {
         activePlayer = state.getActivePlayer();
         button.textContent = `${activePlayer.token}`
         
+    }
+
+    const clearItems = () => {
+        const items = document.querySelector('.input-items');
+        items.remove()
     }
 
     const deactivateTile = (button) =>{
