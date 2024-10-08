@@ -105,7 +105,7 @@ function Cell() {
 }
 
 function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
-
+    
     const players = [{
         name: playerOneName,
         token: 'X'
@@ -117,6 +117,12 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
     let activePlayer = players[0]
 
     const board = Gameboard()
+    
+    const setName = (playerOneName, playerTwoName) => {
+        let one = playerOneName
+        let two = playerTwoName
+        return one, two;
+    }
 
     const switchActivePlayer = () => {
      /* activePlayer = */  activePlayer === players[0] ? activePlayer = players[1] : activePlayer = players[0];
@@ -129,8 +135,21 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
     };
 
     const endGame = () => {
-        board.newBoard()
+        const dialog = document.querySelector('.modal')
+        const winText = document.querySelector('.modal > h1')
+        const newGameBtn = document.querySelector('.win')
+        const closeBtn = document.querySelector('.close')
+
+        winText.textContent = `${getActivePlayer().name} wins the round!`
+        newGameBtn.addEventListener('click',() => window.location.reload());
+        
+        closeBtn.addEventListener('click', () => dialog.close());
+
+        dialog.showModal()
+        
     }
+
+    
 
     const getActivePlayer = () => activePlayer;
 
@@ -155,10 +174,7 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
     //     switchActivePlayer();
     //     printNewRound();
     // }  
-    const testCase = () =>
-    {
-        console.log('boop')
-    }
+   
     const checkWin = () => {
         const winBoard = board.printBoard();
         console.table(board.getBoard());
@@ -168,6 +184,7 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
         else if (winBoard[0][0] === 'X' && winBoard[0][1] === 'X' && winBoard[0][2] === 'X') {
             // horizontal top
             console.log(`${getActivePlayer().name} wins the round!`)
+            endGame();
             return 'win';
         } else if (winBoard[1][0] === 'X' && winBoard[1][1] === 'X' && winBoard[1][2] === 'X') {
             // horizontal middle
@@ -224,7 +241,7 @@ function Gamestate(playerOneName = 'playerOne', playerTwoName = 'playerTwo') {
 
 
     printNewRound()
-    return { playRound, getActivePlayer }
+    return { playRound, getActivePlayer,setName }
 }
 
 function displayController(){
@@ -233,6 +250,8 @@ function displayController(){
 
     const state=Gamestate();
 
+    const nameOne = 'dave'
+    const nameTwo = ' harry'
     let activePlayer = state.getActivePlayer();
 
     const activateTiles = () => {
@@ -295,7 +314,12 @@ function displayController(){
     
    
 }
-
+    const startButtonActivation = () => {
+        let btn =  document.querySelector('.input-items button');
+        btn.addEventListener('click', () => {
+        activateTiles(),
+        state.setName(nameOne, nameTwo)})
+    }
     const changeText = (button) => {
         activePlayer = state.getActivePlayer();
         button.textContent = `${activePlayer.token}`
@@ -305,7 +329,10 @@ function displayController(){
     const deactivateTile = (button) =>{
         button.setAttribute('disabled','');
     }
-return {activateTiles}
+
+    startButtonActivation()
+    
+return {activateTiles, startButtonActivation}
 }
 
 // const test1= Gamestate();
